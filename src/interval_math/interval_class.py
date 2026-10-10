@@ -199,6 +199,24 @@ class Interval:
 
         return Interval(np.tan(lo), np.tan(hi))
 
+    # Inverse Trig:
+     def asin(self):
+        # Domain check
+        if self.min < -1 or self.max > 1:
+            raise ValueError("asin domain is [-1, 1]")
+        return Interval(math.asin(self.min), math.asin(self.max))
+
+    def acos(self):
+        # Domain check
+        if self.min < -1 or self.max > 1:
+            raise ValueError("acos domain is [-1, 1]")
+        # acos is decreasing → reverse endpoints
+        return Interval(math.acos(self.max), math.acos(self.min))
+
+    def atan(self):
+        # atan is monotone increasing everywhere
+        return Interval(math.atan(self.min), math.atan(self.max))
+
     # -------------------------
     # Comparisons (interval logic)
     # -------------------------
@@ -275,6 +293,18 @@ def sqrt(arg: float | np.ndarray | Interval):
         return np.sqrt(arg)
 
 
+def asin(x): 
+    return x.asin() if isinstance(x, Interval) else np.asin(x)
+
+
+def acos(x): 
+    return x.acos() if isinstance(x, Interval) else np.acos(x)
+
+
+def atan(x): 
+    return x.atan() if isinstance(x, Interval) else np.atan(x)
+
+
 def main() -> None:
     # Test:
     A = Interval(2, 1)
@@ -347,6 +377,13 @@ def main() -> None:
         print(f"val3 = {val3}")
     except:
         print("failed...")
+    
+    
+    x = Interval(-0.5, 0.8)
+
+    print(x.asin())
+    print(x.acos())
+    print(x.atan()) 
 
 
 if __name__ == "__main__":
