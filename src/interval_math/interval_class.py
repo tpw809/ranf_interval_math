@@ -200,22 +200,22 @@ class Interval:
         return Interval(np.tan(lo), np.tan(hi))
 
     # Inverse Trig:
-     def asin(self):
+    def arcsin(self):
         # Domain check
         if self.min < -1 or self.max > 1:
             raise ValueError("asin domain is [-1, 1]")
-        return Interval(math.asin(self.min), math.asin(self.max))
+        return Interval(np.arcsin(self.min), np.arcsin(self.max))
 
-    def acos(self):
+    def arccos(self):
         # Domain check
         if self.min < -1 or self.max > 1:
             raise ValueError("acos domain is [-1, 1]")
         # acos is decreasing → reverse endpoints
-        return Interval(math.acos(self.max), math.acos(self.min))
+        return Interval(np.arccos(self.max), np.arccos(self.min))
 
-    def atan(self):
+    def arctan(self):
         # atan is monotone increasing everywhere
-        return Interval(math.atan(self.min), math.atan(self.max))
+        return Interval(np.arctan(self.min), np.arctan(self.max))
 
     # -------------------------
     # Comparisons (interval logic)
@@ -293,17 +293,25 @@ def sqrt(arg: float | np.ndarray | Interval):
         return np.sqrt(arg)
 
 
-def asin(x): 
-    return x.asin() if isinstance(x, Interval) else np.asin(x)
+def arcsin(x): 
+    return x.arcsin() if isinstance(x, Interval) else np.arcsin(x)
 
 
-def acos(x): 
-    return x.acos() if isinstance(x, Interval) else np.acos(x)
+def arccos(x): 
+    return x.arccos() if isinstance(x, Interval) else np.arccos(x)
 
 
-def atan(x): 
-    return x.atan() if isinstance(x, Interval) else np.atan(x)
+def arctan(x): 
+    return x.arctan() if isinstance(x, Interval) else np.arctan(x)
 
+
+def min(x):
+    return x.min if isinstance(x, Interval) else np.min(x)
+
+
+def max(x):
+    return x.max if isinstance(x, Interval) else np.max(x)
+    
 
 def main() -> None:
     # Test:
@@ -381,9 +389,9 @@ def main() -> None:
     
     x = Interval(-0.5, 0.8)
 
-    print(x.asin())
-    print(x.acos())
-    print(x.atan()) 
+    print(x.arcsin())
+    print(x.arccos())
+    print(x.arctan()) 
 
 
 if __name__ == "__main__":

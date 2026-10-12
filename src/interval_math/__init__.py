@@ -2,4 +2,9 @@ from interval_math.interval_class import Interval
 from interval_math.interval_class import sin
 from interval_math.interval_class import cos
 from interval_math.interval_class import tan
+from interval_math.interval_class import arcsin
+from interval_math.interval_class import arccos
+from interval_math.interval_class import arctan
 from interval_math.interval_class import sqrt
+from interval_math.interval_class import min
+from interval_math.interval_class import max
